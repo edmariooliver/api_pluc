@@ -34,7 +34,6 @@ class LinkController extends Controller
 
         }
 
-        
         //Variável para descobrir se o link já existe no banco (será usada no bloco abaixo)
         $link_exists = $link->where("link_orig", "=", $request->link)->first();
 
@@ -83,20 +82,23 @@ class LinkController extends Controller
             
             return response()->json($response);
         }
-
     }
 
     /*
-        Essa função recebe um grupo de letras aleatorias, caso esse grupo esteja ligado à algum link no banco
-        os dados desse link serão retornados em json
+       +------------------------------------------------------------------------------------------------------+ 
+       |Essa função recebe um grupo de letras aleatorias, caso esse grupo esteja ligado à algum link no banco |
+       |os dados desse link serão retornados em json                                                          
     */
     function open(Request $request, Link $link){
         
         //Verificando se existe
         $link_exists = $link->where("link_encurt", "=", $request->link)->first();
         
+        if(!$link_exists){
+            return response()->json(["message"=>"Nada encontrado", "status"=>"0"], 404);
+        }
         if($link_exists){
-            return response()->json(["link_original"=>$link_exists->link_orig]);
+            return response()->json(["link_original"=>$link_exists->link_orig, "status"=>"1"]);
         }
     }
 }
