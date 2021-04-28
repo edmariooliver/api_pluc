@@ -13,7 +13,7 @@ Route::group(["middleware"=>["auth:api"]], function(){
     Route::post("/open",     [LinkController::class, "open"]);
 });
 
-Route::post("/login",  [LoginController::class, "login"]);
-Route::post("/register",   [RegisterController::class, "save"]);
-Route::get("/logout",  [LogoutController::class, "logout"]);
+Route::post("/login",    [LoginController::class, "login"]);
+Route::post("/register", [RegisterController::class, "save"]);
+Route::get("/logout",    [LogoutController::class, "logout"]);
 

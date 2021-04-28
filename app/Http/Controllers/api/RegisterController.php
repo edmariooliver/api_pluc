@@ -29,6 +29,7 @@ class RegisterController extends Controller
         if(!filter_var($request->email, FILTER_VALIDATE_EMAIL)){
             return response()->json(["message"=>"Email inválido", "status"=>"0"], 406);
         }
+        
         /* Se não cair em nenhuma das condições acima, os dados são guardados no 
         banco de dados, e é retornado uma mensagem de sucesso
         */
